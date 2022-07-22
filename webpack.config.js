@@ -6,7 +6,7 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const FriendlyErrorsWebpackPlugin = require('friendly-errors-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
-// const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
+const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const webpack = require('webpack');
 
 const DEV_MODE = process.env.NODE_ENV === 'development';
@@ -14,7 +14,7 @@ const CONTENT_HASH = DEV_MODE ? '' : '-[contenthash]';
 
 // import { Configuration } from 'w'
 
-const creatSCSSRules = (isModule) => {
+const createSCSSRules = (isModule) => {
   const moduleOptions = isModule
     ? {
         importLoaders: 1,
@@ -105,11 +105,11 @@ module.exports = {
         oneOf: [
           {
             test: /\.module.scss$/,
-            use: creatSCSSRules(true),
+            use: createSCSSRules(true),
           },
           {
             test: /\.scss$/,
-            use: creatSCSSRules(false),
+            use: createSCSSRules(false),
           },
         ],
       },
@@ -192,7 +192,7 @@ module.exports = {
     }),
     new webpack.DefinePlugin({}),
     new ProgressBarPlugin(),
-    // ...(DEV_MODE ? [new ReactRefreshWebpackPlugin()] : []),
+    ...(DEV_MODE ? [new ReactRefreshWebpackPlugin()] : []),
   ],
   /**
    * @type {import('webpack-dev-server').Configuration}

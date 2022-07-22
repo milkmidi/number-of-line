@@ -5,11 +5,14 @@
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack serve",
     "build": "rimraf ./dist && cross-env NODE_ENV=production webpack",
-    "test": "cross-env APP_ENV=jest jest"
+    "test": "cross-env APP_ENV=jest jest",
+    "deploy": "git checkout main && git merge dev --no-ff && git push && git checkout dev"
   },
   "dependencies": {
+    "daisyui": "^2.19.1",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0"
+    "react-dom": "^18.2.0",
+    "react-input-mask": "^3.0.0-alpha.2"
   },
   "devDependencies": {
     "@babel/core": "^7.18.9",
