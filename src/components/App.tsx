@@ -16,12 +16,17 @@ import ResultNumber, { type ResultNumberProps } from './components/ResultNumber'
 const App = () => {
   const [numberResults, setNumberResults] = useState<number[]>([]);
   const [nineMap, setNineMap] = useState<Record<string, ResultNumberProps>>({});
-  const [input, setInput] = useState('');
+  const [input, setInput] = useState(() => {
+    const u = new URLSearchParams(window.location.search);
+    return u.get('d') || '';
+  });
   useEffect(() => {
     const isBirthDay = validationBirthDay(input);
     if (isBirthDay) {
       const results = parserBirthDay(input);
       setNumberResults(results);
+
+      window.history.pushState({}, '', `?d=${input}`);
 
       const nineMapResults: Record<string, ResultNumberProps> = {};
       Array.from(Array(9).keys()).forEach((i) => {
