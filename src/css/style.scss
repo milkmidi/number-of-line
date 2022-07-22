@@ -1,0 +1,114 @@
+/*
+version 1.0.1
+*/
+body {
+  font-family: Helvetica, Verdana, Arial, "微軟正黑體", "Microsoft JhengHei", "儷黑 Pro", "LiHei Pro", sans-serif;
+}
+section {
+  border: 2px solid #bdc3c7;
+  margin: 10px 0;
+  padding: 2.4rem 1rem 1rem;
+  border-radius: 8px;
+  position: relative;
+}
+
+section[data-name]::before {
+  z-index: 1;
+  content: attr(data-name);
+  pointer-events: none;
+  border-radius: .25rem;
+  padding: 0.2rem;
+  position: absolute;
+  top: 0;
+  left: 0;
+  color: white;
+  background-color: #27ae60;
+  font-size: 20px;
+}
+
+$COLORS: #3498db, #9b59b6, #e67e22, #34495e;
+@each $color in $COLORS {
+  $i: index($COLORS, $color);
+  section[data-name].style-#{$i}::before {
+    background-color: $color;
+  }
+}
+
+
+@keyframes donutSpin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loading-container {
+  &.loading {
+    &:after {
+      display: block;
+      position: absolute;
+      content: '';
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: #00000088;
+    }
+    &:before {
+      position: absolute;
+      content: '';
+      display: inline-block;
+      border: 4px solid white;
+      border-color: white;
+      border-left-color: transparent;
+      border-radius: 50%;
+      width: 50px;
+      height: 50px;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      margin: auto;
+      z-index: 2;
+      animation: donutSpin 1.2s linear infinite;
+    }
+  }
+}
+
+
+.my-btn {
+  border: 2px solid black;
+  font-size: 20px;
+  font-weight: bold;
+  padding: 6px 24px;
+  transition: all 0.2s;
+  border-radius: 50px;
+  cursor: pointer;
+  &:active {
+    box-shadow: 0 0 4px 0px rgba(0,0,0,0.7);
+  }
+}
+.primary-btn {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #1abc9c;
+  box-shadow: 0 6px 0 #27ae60;
+  margin-right: 15px;
+  background-color: #2ecc71;
+  border-radius: 10px;
+  color: white;
+  text-align: center;
+  font-size: 18px;
+  position: relative;
+  cursor: pointer;
+  margin-bottom: 5px;
+  transition: all .35s;
+  &:hover{
+    transform: translateY(3px);
+    box-shadow: 0 3px 0 #27ae60;
+  } 
+}
