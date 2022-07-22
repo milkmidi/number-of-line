@@ -1,3 +1,8 @@
+const plugin = require('tailwindcss/plugin');
+
+/**
+ * @type {import('tailwindcss').Config}
+ */
 module.exports = {
   jit: true,
   content: ['./src/**/*.{html,js,tsx}'],
@@ -8,5 +13,10 @@ module.exports = {
       },
     },
   },
-  plugins: [require('daisyui')],
+  plugins: [
+    require('daisyui'),
+    plugin(({ addUtilities, matchUtilities, addComponents, addVariant, e, theme }) => {
+      addVariant('child', ' & > *');
+    }),
+  ],
 };
