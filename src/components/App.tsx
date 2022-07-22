@@ -1,23 +1,23 @@
-import React from 'react';
+import { useEffect, useState } from 'react';
 
-const App: React.FC = () => {
-  const [count] = React.useState(0);
-  React.useEffect(() => {
-    // https://webpack.js.org/api/module-methods/#magic-comments
-    import(
-      /* webpackChunkName: "my-chunk-utils" */
-      /* webpackExports: ["default", "foo"] */
-      '../utils'
-    ).then((module) => {
-      console.log(module);
-      console.log(module.default());
-      console.log(module.foo());
-    });
-  });
+const App = () => {
+  const [birthDay, setBirthDay] = useState('');
+  useEffect(() => {
+    console.log(birthDay);
+  }, [birthDay]);
+
   return (
     <div className="app container mx-auto">
-      <h1 className="mx-auto block text-5xl">hi react444</h1>
-      <h1 className="text-3xl text-red-400">{count}</h1>
+      <div>
+        <input
+          type="number"
+          className="input input-bordered"
+          value={birthDay}
+          onChange={(e) => setBirthDay(e.target.value)}
+        />
+      </div>
+
+      <button className="btn btn-primary">123</button>
     </div>
   );
 };
