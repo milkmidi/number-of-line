@@ -1,0 +1,11 @@
+.root {
+  @apply relative border text-3xl flex justify-center items-center;
+  padding: 40px 0;
+}
+.svg {
+  position: absolute;
+  path, circle, polygon {
+    fill: transparent;
+    stroke-width: 2;
+  }
+}
