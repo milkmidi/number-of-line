@@ -105,7 +105,7 @@ const App = () => {
             value={input}
           />
         </div>
-        <div className="border">
+        <div className="border py-2">
           {numberResults.length === 3 && (
             <div className="flex text-center text-4xl">
               <div className="w-1/3 space-y-2">
@@ -123,7 +123,7 @@ const App = () => {
             </div>
           )}
         </div>
-        <div className="flex flex-wrap border text-center text-4xl child:w-1/3 child:py-4">
+        <div className="-mx-2 flex flex-wrap text-center text-4xl child:w-1/3 child:px-2 child:py-4">
           {Object.values(nineMap).map((r) => {
             return (
               <div key={r.number}>

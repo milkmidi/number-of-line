@@ -9,6 +9,7 @@
     "deploy": "git checkout main && git merge dev --no-ff && git push && git checkout dev"
   },
   "dependencies": {
+    "classnames": "^2.3.1",
     "daisyui": "^2.19.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
