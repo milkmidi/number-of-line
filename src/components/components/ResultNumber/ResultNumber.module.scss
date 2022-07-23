@@ -1,11 +1,23 @@
 .root {
   @apply relative border text-3xl flex justify-center items-center;
   padding: 40px 0;
+  border-radius: 10px;
 }
 .svg {
   position: absolute;
   path, circle, polygon {
     fill: transparent;
-    stroke-width: 2;
+    stroke-width: 1;
+  }
+  &[data-type="triangle"] {
+    transform: translateY(-5px);
+    polygon {
+      stroke-width: 3;
+    }
+  }
+  &[data-type="square"] {
+    polygon {
+      stroke-width: 4;
+    }
   }
 }

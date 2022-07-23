@@ -14,42 +14,48 @@ const ResultNumber: React.FC<ResultNumberProps> = (props) => {
     <div className={style.root}>
       <p className="text-2xl font-bold">{number}</p>
       {Array.from(Array(circleCount).keys()).map((i) => {
-        const size = (50 * ((i + 1) * 0.8)) | 0;
+        const idx = i + 1;
+        const size = (32 * idx) | (0 + 16);
+        const center = size / 2;
+        const radius = center - 2;
         return (
           <svg
             key={i}
             height={size}
             width={size}
-            viewBox="0 0 50 50"
+            viewBox={`0 0 ${size} ${size}`}
+            data-type="circle"
             className={style.svg}
           >
-            <circle cx="25" cy="25" r="20" stroke="black" />
+            <circle cx={center} cy={center} r={radius} stroke="#353b48" />
           </svg>
         );
       })}
       {Array.from(Array(triangleCount).keys()).map((i) => {
-        const size = 50 * ((i + 1) * 0.8);
+        const size = 50 * ((i + 1) * 1.2);
         return (
           <svg
             key={i}
             height={size}
             width={size}
             viewBox="0 0 50 50"
+            data-type="triangle"
             className={style.svg}
           >
-            <polygon points="25 0, 50 48, 0 48" stroke="#3498db" />
+            <polygon points="25 0, 48 48, 0 48" stroke="#2ecc71" />
           </svg>
         );
       })}
 
       {Array.from(Array(squareCount).keys()).map((i) => {
-        const size = 50 * ((i + 1) * 0.8);
+        const size = 50 * ((i + 1) * 1.2);
         return (
           <svg
             key={i}
             height={size}
             width={size}
             viewBox="0 0 50 50"
+            data-type="square"
             className={style.svg}
           >
             <polygon points="2 2, 48 2,48 48, 2 48" stroke="#c0392b" />
