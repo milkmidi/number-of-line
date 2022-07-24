@@ -62,13 +62,16 @@ const App = () => {
           // @ts-ignore
           nineMapResults[text].triangleCount += 1;
         });
-      result.minor
-        .toString()
-        .split('')
-        .forEach((text) => {
-          // @ts-ignore
-          nineMapResults[text].triangleCount += 1;
-        });
+
+      if (result.minor > 0) {
+        result.minor
+          .toString()
+          .split('')
+          .forEach((text) => {
+            // @ts-ignore
+            nineMapResults[text].triangleCount += 1;
+          });
+      }
 
       const mainLifeNumber = result.patch.toString();
       // @ts-ignore
@@ -109,12 +112,15 @@ const App = () => {
         </div>
         <div className="border py-2">
           {numberResult && (
-            <div className="flex text-center text-4xl">
+            <div className="flex justify-center text-center text-4xl">
               <div className="w-1/3 space-y-2">
                 <p>後天數</p>
                 <p>{numberResult.major}</p>
               </div>
-              <div className="w-1/3 space-y-2">
+              <div
+                className="hidden w-1/3 space-y-2 data-active:block"
+                data-active={!!numberResult.minorText}
+              >
                 <p>{numberResult.minorText}</p>
                 <p>{numberResult.minor}</p>
               </div>

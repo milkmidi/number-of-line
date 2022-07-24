@@ -18,25 +18,23 @@ export type NumberOfLifeResult = {
 };
 export function parserBirthDay(birthDay: string): NumberOfLifeResult {
   const [year, month, day] = birthDay.split('/');
-  const yearNumber = [...year, ...month, ...day].reduce((prev, curr) => {
-    return prev + +curr;
-  }, 0);
-  const monthNumber = yearNumber
+
+  const yearNumber = [...year, ...month, ...day].reduce((prev, curr) => prev + +curr, 0);
+  let monthNumber = yearNumber
     .toString()
     .split('')
-    .reduce((prev, curr) => {
-      return prev + +curr;
-    }, 0);
+    .reduce((prev, curr) => prev + +curr, 0);
   const dayNumber = monthNumber
     .toString()
     .split('')
-    .reduce((prev, curr) => {
-      return prev + +curr;
-    }, 0);
+    .reduce((prev, curr) => prev + +curr, 0);
 
   let minorText = '後天數';
   if (monthNumber.toString()[0] === monthNumber.toString()[1]) {
     minorText = '卓越數';
+  } else if (monthNumber < 10) {
+    minorText = '';
+    monthNumber = -1;
   }
   return {
     major: yearNumber,
