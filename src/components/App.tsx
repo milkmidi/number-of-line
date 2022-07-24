@@ -1,5 +1,5 @@
 import { useEffect, useState, useRef } from 'react';
-import { validationBirthDay, parserBirthDay } from '@/utils';
+import { validationBirthDay, parserBirthDay, type NumberOfLifeResult } from '@/utils';
 // @ts-ignore
 import InputMask from 'react-input-mask';
 // import SVGCircle from './components/SVGCircle';
@@ -16,7 +16,7 @@ import ResultNumber, { type ResultNumberProps } from './components/ResultNumber'
 
 const App = () => {
   const [name, setName] = useState('');
-  const [numberResults, setNumberResults] = useState<number[]>([]);
+  const [numberResult, setNumberResult] = useState<NumberOfLifeResult | null>(null);
   const [nineMap, setNineMap] = useState<Record<string, ResultNumberProps>>({});
   const [input, setInput] = useState(() => {
     const u = new URLSearchParams(window.location.search);
@@ -28,8 +28,8 @@ const App = () => {
   useEffect(() => {
     const isBirthDay = validationBirthDay(input);
     if (isBirthDay) {
-      const results = parserBirthDay(input);
-      setNumberResults(results);
+      const result = parserBirthDay(input);
+      setNumberResult(result);
 
       birthInputRef.current?.blur();
 
@@ -55,14 +55,14 @@ const App = () => {
           nineMapResults[text].circleCount += 1;
         });
 
-      results[0]
+      result.major
         .toString()
         .split('')
         .forEach((text) => {
           // @ts-ignore
           nineMapResults[text].triangleCount += 1;
         });
-      results[1]
+      result.minor
         .toString()
         .split('')
         .forEach((text) => {
@@ -70,13 +70,13 @@ const App = () => {
           nineMapResults[text].triangleCount += 1;
         });
 
-      const mainLifeNumber = results[2].toString();
+      const mainLifeNumber = result.patch.toString();
       // @ts-ignore
       nineMapResults[mainLifeNumber].squareCount += 1;
       delete nineMapResults['0'];
       setNineMap(nineMapResults);
     } else {
-      setNumberResults([]);
+      setNumberResult(null);
       setNineMap({});
     }
   }, [input]);
@@ -108,19 +108,19 @@ const App = () => {
           />
         </div>
         <div className="border py-2">
-          {numberResults.length === 3 && (
+          {numberResult && (
             <div className="flex text-center text-4xl">
               <div className="w-1/3 space-y-2">
                 <p>後天數</p>
-                <p>{numberResults[0]}</p>
+                <p>{numberResult.major}</p>
               </div>
               <div className="w-1/3 space-y-2">
-                <p>卓越數</p>
-                <p>{numberResults[1]}</p>
+                <p>{numberResult.minorText}</p>
+                <p>{numberResult.minor}</p>
               </div>
               <div className="w-1/3 space-y-2">
                 <p>主命數</p>
-                <p>{numberResults[2]}</p>
+                <p>{numberResult.patch}</p>
               </div>
             </div>
           )}
