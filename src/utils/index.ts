@@ -10,7 +10,13 @@ export function validationBirthDay(value: string) {
   return BIRTHDAY_PATTERN.test(value);
 }
 
-export function parserBirthDay(birthDay: string) {
+export type NumberOfLifeResult = {
+  major: number;
+  minor: number;
+  patch: number;
+  minorText: string;
+};
+export function parserBirthDay(birthDay: string): NumberOfLifeResult {
   const [year, month, day] = birthDay.split('/');
   const yearNumber = [...year, ...month, ...day].reduce((prev, curr) => {
     return prev + +curr;
@@ -28,5 +34,14 @@ export function parserBirthDay(birthDay: string) {
       return prev + +curr;
     }, 0);
 
-  return [yearNumber, monthNumber, dayNumber];
+  let minorText = '後天數';
+  if (monthNumber.toString()[0] === monthNumber.toString()[1]) {
+    minorText = '卓越數';
+  }
+  return {
+    major: yearNumber,
+    minor: monthNumber,
+    minorText,
+    patch: dayNumber,
+  };
 }

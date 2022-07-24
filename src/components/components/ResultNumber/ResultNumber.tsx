@@ -32,17 +32,22 @@ const ResultNumber: React.FC<ResultNumberProps> = (props) => {
         );
       })}
       {Array.from(Array(triangleCount).keys()).map((i) => {
-        const size = 50 * ((i + 1) * 1.2);
+        const size = 50 * ((i + 1) * 0.8) + 10;
+        const center = size / 2;
+        const sizeMinusStorke = size - 3;
         return (
           <svg
             key={i}
             height={size}
             width={size}
-            viewBox="0 0 50 50"
+            viewBox={`0 0 ${size} ${size}`}
             data-type="triangle"
             className={style.svg}
           >
-            <polygon points="25 0, 48 48, 0 48" stroke="#2ecc71" />
+            <polygon
+              points={`${center} 0, ${sizeMinusStorke} ${sizeMinusStorke}, 0 ${sizeMinusStorke}`}
+              stroke="#2ecc71"
+            />
           </svg>
         );
       })}
