@@ -37,9 +37,9 @@ const App = () => {
 
       // TODO，抽離至 utils 寫
       const nineMapResults: Record<string, ResultNumberProps> = {};
-      Array.from(Array(9).keys()).forEach((i) => {
-        nineMapResults[i + 1] = {
-          number: i + 1,
+      Array.from(Array(10).keys()).forEach((i) => {
+        nineMapResults[i] = {
+          number: i,
           circleCount: 0,
           triangleCount: 0,
           squareCount: 0,
@@ -51,27 +51,29 @@ const App = () => {
         .join('')
         .split('')
         .forEach((text) => {
-          if (text !== '0') {
-            // @ts-ignore
-            nineMapResults[text].circleCount += 1;
-          }
+          // @ts-ignore
+          nineMapResults[text].circleCount += 1;
         });
 
       results[0]
         .toString()
         .split('')
         .forEach((text) => {
-          if (text !== '0') {
-            // @ts-ignore
-            nineMapResults[text].triangleCount += 1;
-          }
+          // @ts-ignore
+          nineMapResults[text].triangleCount += 1;
+        });
+      results[1]
+        .toString()
+        .split('')
+        .forEach((text) => {
+          // @ts-ignore
+          nineMapResults[text].triangleCount += 1;
         });
 
       const mainLifeNumber = results[2].toString();
-      if (mainLifeNumber !== '0') {
-        // @ts-ignore
-        nineMapResults[mainLifeNumber].squareCount += 1;
-      }
+      // @ts-ignore
+      nineMapResults[mainLifeNumber].squareCount += 1;
+      delete nineMapResults['0'];
       setNineMap(nineMapResults);
     } else {
       setNumberResults([]);
