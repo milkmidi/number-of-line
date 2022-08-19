@@ -27,7 +27,7 @@ const ResultNumber: React.FC<ResultNumberProps> = (props) => {
             data-type="circle"
             className={style.svg}
           >
-            <circle cx={center} cy={center} r={radius} stroke="#353b48" />
+            <circle cx={center} cy={center} r={radius} stroke="#0000ff" />
           </svg>
         );
       })}
