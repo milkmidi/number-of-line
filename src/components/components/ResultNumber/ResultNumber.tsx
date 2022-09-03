@@ -10,12 +10,13 @@ export type ResultNumberProps = {
 };
 const ResultNumber: React.FC<ResultNumberProps> = (props) => {
   const { number, circleCount = 0, triangleCount = 0, squareCount = 0 } = props;
+  const active = circleCount + triangleCount + squareCount > 0;
   return (
-    <div className={style.root}>
+    <div className={style.root} data-active={active}>
       <p className="text-2xl font-bold">{number}</p>
       {Array.from(Array(circleCount).keys()).map((i) => {
         const idx = i + 1;
-        const size = (32 * idx) | (0 + 16);
+        const size = (32 * idx) | (0 + 14);
         const center = size / 2;
         const radius = center - 2;
         return (
@@ -27,14 +28,14 @@ const ResultNumber: React.FC<ResultNumberProps> = (props) => {
             data-type="circle"
             className={style.svg}
           >
-            <circle cx={center} cy={center} r={radius} stroke="#0000ff" />
+            <circle cx={center} cy={center} r={radius} stroke="#3498db" />
           </svg>
         );
       })}
       {Array.from(Array(triangleCount).keys()).map((i) => {
         const size = 50 * ((i + 1) * 0.8) + 10;
         const center = size / 2;
-        const sizeMinusStorke = size - 3;
+        const sizeMinusStroke = size - 3;
         return (
           <svg
             key={i}
@@ -45,7 +46,7 @@ const ResultNumber: React.FC<ResultNumberProps> = (props) => {
             className={style.svg}
           >
             <polygon
-              points={`${center} 0, ${sizeMinusStorke} ${sizeMinusStorke}, 0 ${sizeMinusStorke}`}
+              points={`${center} 0, ${sizeMinusStroke} ${sizeMinusStroke}, 0 ${sizeMinusStroke}`}
               stroke="#2ecc71"
             />
           </svg>

@@ -99,11 +99,7 @@ const App = () => {
             onChange={(e) => setName(e.target.value)}
           />
         </div>
-        <h1 className="text-center text-3xl">
-          西元生日
-          <br />
-          先天數
-        </h1>
+        <h1 className="text-center text-3xl">西元生日</h1>
         <div>
           <InputMask
             mask="9999/99/99"
@@ -118,7 +114,7 @@ const App = () => {
             <div className="flex justify-center text-center text-4xl">
               <div className="w-1/3 space-y-2">
                 <p>後天數</p>
-                <p>{numberResult.major}</p>
+                <p className="font-bold text-green">{numberResult.major}</p>
               </div>
               <div
                 className="hidden w-1/3 space-y-2 data-active:block"
@@ -129,7 +125,7 @@ const App = () => {
               </div>
               <div className="w-1/3 space-y-2">
                 <p>主命數</p>
-                <p>{numberResult.patch}</p>
+                <p className="font-bold text-red">{numberResult.patch}</p>
               </div>
             </div>
           )}
