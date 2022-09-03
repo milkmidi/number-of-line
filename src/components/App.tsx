@@ -15,7 +15,10 @@ import ResultNumber, { type ResultNumberProps } from './components/ResultNumber'
  */
 
 const App = () => {
-  const [name, setName] = useState('');
+  const [name, setName] = useState(() => {
+    const u = new URLSearchParams(window.location.search);
+    return u.get('name') || '';
+  });
   const [numberResult, setNumberResult] = useState<NumberOfLifeResult | null>(null);
   const [nineMap, setNineMap] = useState<Record<string, ResultNumberProps>>({});
   const [input, setInput] = useState(() => {
@@ -33,7 +36,7 @@ const App = () => {
 
       birthInputRef.current?.blur();
 
-      window.history.pushState({}, '', `?d=${input}`);
+      window.history.pushState({}, '', `?d=${input}&name=${encodeURIComponent(name)}`);
 
       // TODO，抽離至 utils 寫
       const nineMapResults: Record<string, ResultNumberProps> = {};
@@ -82,7 +85,7 @@ const App = () => {
       setNumberResult(null);
       setNineMap({});
     }
-  }, [input]);
+  }, [input, name]);
 
   return (
     <div className="app container mx-auto px-5">
