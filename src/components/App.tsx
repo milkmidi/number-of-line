@@ -5,6 +5,7 @@ import InputMask from 'react-input-mask';
 // import SVGCircle from './components/SVGCircle';
 // import SVGTriangle from './components/SVGTriangle';
 // import SVGSquare from './components/SVGSquare';
+import html2canvas from 'html2canvas';
 import ResultNumber, { type ResultNumberProps } from './components/ResultNumber';
 
 /**
@@ -25,6 +26,8 @@ const App = () => {
     const u = new URLSearchParams(window.location.search);
     return u.get('d') || '';
   });
+
+  const [snapshotB64, setSnapshotB64] = useState('');
 
   const birthInputRef = useRef<HTMLInputElement>(null);
 
@@ -87,6 +90,13 @@ const App = () => {
     }
   }, [input, name]);
 
+  const atSaveToImage = () => {
+    html2canvas(document.querySelector('.app') as HTMLElement).then((canvas) => {
+      const b64 = canvas.toDataURL();
+      setSnapshotB64(b64);
+    });
+  };
+
   return (
     <div className="app container mx-auto px-5">
       <div className="mx-auto max-w-2xl space-y-4 py-5">
@@ -143,6 +153,12 @@ const App = () => {
             );
           })}
         </div>
+        <div className="text-center">
+          <button className="btn btn-primary w-1/2" onClick={atSaveToImage}>
+            Save
+          </button>
+        </div>
+        {snapshotB64 && <img src={snapshotB64} />}
       </div>
     </div>
   );
