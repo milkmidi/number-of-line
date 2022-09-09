@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/control-has-associated-label */
 import { useEffect, useState, useRef } from 'react';
 import { validationBirthDay, parserBirthDay, type NumberOfLifeResult } from '@/utils';
 // @ts-ignore
@@ -6,7 +7,7 @@ import InputMask from 'react-input-mask';
 // import SVGTriangle from './components/SVGTriangle';
 // import SVGSquare from './components/SVGSquare';
 import ResultNumber, { type ResultNumberProps } from './components/ResultNumber';
-
+import styles from './App.module.scss';
 /**
  * 先天圓形⭕️🟢
  * 後天三角 ▲🔺
@@ -87,6 +88,11 @@ const App = () => {
     }
   }, [input, name]);
 
+  const atClean = () => {
+    setInput('');
+    window.history.pushState({}, '', '?');
+  };
+
   return (
     <div className="app container mx-auto px-5">
       <div className="mx-auto max-w-2xl space-y-4 py-5">
@@ -100,13 +106,18 @@ const App = () => {
           />
         </div>
         <h1 className="text-center text-3xl">西元生日</h1>
-        <div>
+        <div className="relative overflow-hidden">
           <InputMask
             mask="9999/99/99"
             className="input input-bordered w-full text-center text-3xl"
             onChange={(e: any) => setInput(e.target.value)}
             ref={birthInputRef}
             value={input}
+          />
+          <button
+            data-active={input !== '____/__/__' && input !== ''}
+            onClick={atClean}
+            className={styles.crossBTN}
           />
         </div>
         <div className="border py-2">
