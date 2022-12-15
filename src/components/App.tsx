@@ -31,6 +31,7 @@ const App = () => {
 
   useEffect(() => {
     const isBirthDay = validationBirthDay(input);
+    console.log(isBirthDay);
     if (isBirthDay) {
       const result = parserBirthDay(input);
       setNumberResult(result);
@@ -100,7 +101,7 @@ const App = () => {
           <div className="text-center text-3xl">Your Name</div>
           <input
             type="text"
-            className="input input-bordered w-full text-3xl"
+            className="input input-bordered w-full text-center text-3xl"
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
